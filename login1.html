@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            background-image: url('static/img7.jpg');
+            background-size: 10000px;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #060f10;
+            background-image: url('static/curved-11.jpg'); /* Replace 'your-image-url.jpg' with your image URL */
+            border-radius: 100px;
+            box-shadow: 6px 6px 6px rgb(251, 249, 249);
+            padding: 50px;
+            width: 400px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0.2, 0.8, 0, 0.9);
+        }
+        h1 {
+            color: #0a399e;
+            margin-bottom: 30px;
+            font-size: 40px;
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="submit"]
+        {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+            display: none;
+        }
+        .register-page{
+            text-decoration: underline;
+            color:#fff;
+            cursor: pointer;
+            margin-top: 15px;
+            display: block;
+        }
+        .forgot-password {
+            text-decoration: underline;
+            color: #fff;
+            cursor: pointer;
+            margin-top: 15px;
+            display: block;
+        }
+        .remember-me {
+            color: #fff;
+        }
+        .social-login {
+            margin-top: 20px;
+        }
+        .social-login a {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .social-login img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+        .social-login img:hover {
+            transform: scale(1.1);
+        }
+        .show-popup .error {
+            display: block;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var error = urlParams.get('error');
+            if (error) {
+                var container = document.querySelector('.container');
+                container.classList.add('show-popup');
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>LOGIN</h1>
+        <form action="login" method="post">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="submit" value="Login">
+            <div class="remember-me">
+                <input type="checkbox" id="remember" name="remember" >
+                <label for="remember">Remember Me</label>
+            </div>
+            <p class="register-page" onclick="location.href='/register'">Don't have an account? Register!! </p>
+            <p class="forgot-password" onclick="location.href='/forgot-password'">Forgot Password?</p>
+        </form>
+        <p class="error"></p>
+    </div>
+</body>
+</html>
