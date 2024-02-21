@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>USER REGISTRATION</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        form {
+            background-color: #0b65da;
+            background-image: url('static/img7.jpg');
+            padding: 20px;
+            border-radius: 18px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease-in-out;
+            max-width: 500px; 
+            width: 100%; 
+            box-sizing: border-box; 
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            align-items: center;
+        }
+        form:hover {
+            transform: scale(1.02);
+        }
+        h2 {
+            text-align: center;
+            grid-column: 1 / -1;
+            color: #ffffff;
+        }
+        div.form-item {
+            display: contents; 
+        }
+        label {
+            text-align: left;
+            padding-left: 10px; 
+            color: #ffffff;
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        input[type="date"],
+        input[type="number"],
+        input[type="tel"],
+        input[user_type] {
+            width: 100%;
+            padding: 8px;
+            margin: 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.2s ease-in-out;
+        }
+        input[type="submit"], input[type="reset"] {
+            width: calc(50% - 5px); /* Adjust width for spacing */
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            grid-column: 2;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        input[type="reset"] {
+            background-color: #007bff;
+            grid-column: 1;
+        }
+        input[type="reset"]:hover {
+            background-color: #0056b3;
+        }
+
+        /* Popup container */
+        .popup {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <form id="registrationForm" action="http://127.0.0.1:5000/register" method="post">
+        <h2>USER REGISTRATION</h2>
+        <div class="form-item">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-item">
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" min="0" required>
+        </div>
+        <div class="form-item">
+            <label for="phn_no">Phone Number:</label>
+            <input type="tel" id="phn_no" name="phn_no" pattern="[0-9]{10}" required>
+        </div>
+        <div class="form-item">
+            <label for="uname">Username:</label>
+            <input type="text" id="uname" name="uname" required>
+        </div>
+        <div class="form-item">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div class="form-item">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-item">
+            <label for="lic_no">Licence Number:</label>
+            <input type="text" id="lic_no" name="lic_no" required>
+        </div>
+        <div class="form-item">
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob" required>
+        </div>
+        <div class="form-item">
+            <label for="user_type">User Type:</label>
+            <select id="user_type" name="user_type" required style="width: 100% ; height: 100%;">
+                <option value="" disabled selected>Select user type</option>
+                <option value="admin">Admin</option>
+                <option value="user">User</option>
+                <option value="service">Service center</option>
+                <option value="insurance_provider">Insurance Provider</option>
+            </select>
+        </div>
+        <input type="reset" value="RESET">
+        <input type="submit" value="REGISTER">
+    </form>
+
+    <!-- Popup message -->
+    <div id="popupSuccess" class="popup">
+        <p>Data inserted successfully!</p>
+    </div>
+    <!-- JavaScript code -->
+    <script>
+        // Function to display success message popup and redirect
+        function displaySuccessAndRedirect() {
+            // Display success message popup
+            document.getElementById("popupSuccess").style.display = "block";
+
+            // Redirect to success.html after 2 seconds
+            setTimeout(function() {
+                window.location.href = "success.html";
+            }, 2000); // Adjust the delay as needed (in milliseconds)
+        }
+
+        // Add event listener to form submission
+        document.getElementById("registrationForm").addEventListener("submit", function(event) {
+            // Prevent default form submission
+            event.preventDefault();
+            
+            // Submit the form
+            var form = event.target;
+            form.submit();
+            
+            // Display success message popup and redirect
+            displaySuccessAndRedirect();
+        });
+    </script>
+</body>
+</html>
