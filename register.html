@@ -12,6 +12,7 @@
             align-items: center;
             background-color: #f0f0f0;
             font-family: Arial, sans-serif;
+            background-color: #37c4e0;
         }
         form {
             background-color: #0b65da;
@@ -137,7 +138,6 @@
             <label for="user_type">User Type:</label>
             <select id="user_type" name="user_type" required style="width: 100% ; height: 100%;">
                 <option value="" disabled selected>Select user type</option>
-                <option value="admin">Admin</option>
                 <option value="user">User</option>
                 <option value="service">Service center</option>
                 <option value="insurance_provider">Insurance Provider</option>
@@ -147,10 +147,6 @@
         <input type="submit" value="REGISTER">
     </form>
 
-    <!-- Popup message -->
-    <div id="popupSuccess" class="popup">
-        <p>Data inserted successfully!</p>
-    </div>
     <!-- JavaScript code -->
     <script>
         // Function to display success message popup and redirect

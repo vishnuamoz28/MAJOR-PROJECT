@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .header2{
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .header img {
+            max-width: 100px; /* Adjust the size of the logo */
+            margin-right: 10px; /* Add some spacing between the logo and text */
+        }
+        .navbar {
+            background-color: #f4f4f4;
+            border-bottom: 1px solid #ccc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+        .navbar .links {
+            margin-left: auto; /* Push links to the right */
+        }
+        .navbar a {
+            text-decoration: none;
+            color: #333;
+            margin: 0 10px;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-grow: 1;
+            padding: 20px;
+        }
+        .sidebar {
+            border-right: 1px solid #ccc;
+            padding: 0; /* Remove default padding */
+            display: flex;
+            text-align:justify;
+            flex-direction: column; /* Change flex-direction to column */
+            justify-content: flex-start; /* Align items to the start */
+        }
+        .sidebar .link {
+            margin-bottom: 30px; /* Add some vertical spacing between links */
+        }
+        .sidebar .link a {
+            color: #000; /* Change the link color to black */
+            text-decoration: none; /* Remove underline from links */
+        }
+        .sidebar .link a:hover {
+            color: #666; /* Change link color on hover */
+        }
+        .main-content {
+            padding: 20px;
+        }
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            margin-top: auto; /* Push footer to the bottom */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src='/static/LOGO_DESIGN.png' alt="Project Logo">
+        <h1>DYNAMIC AUTOMOBILE INSURANCE PREMIUMS</h1>
+    </div>
+    <div class="header2"><h2>ADMIN DASHBOARD</h2></div>
+    <div class="navbar">
+        <div class="links">
+            <a href="#">About</a>
+            <a href="#">Contact Us</a>
+            <a href="{{url_for('logout')}}">Logout</a>
+            <!-- <a href="D:\MajorProject\templates\login1.html">Login</a> -->
+        </div>
+    </div>
+    <div class="container">
+        <div class="sidebar">
+            <!-- Sidebar content goes here -->
+            <div class="link"><a href="{{url_for('user_details')}}">DETAILS</a></div>
+            <div class="link"><a href="{{ url_for('user_approve') }}">USER APPROVAL</a></div>
+            <div class="link"><a href="{{url_for('service_approve')}}">SERVICE CENTER APPROVAL</a></div>
+            <div class="link"><a href="{{url_for('insurance_approve')}}">INSURANCE PROVIDER APPROVAL</a></div>
+        </div>
+        <div class="main-content">
+            <!-- Main content goes here -->
+            <h2>Main Content</h2>
+        </div>
+    </div>
+    <div class="footer">
+        <p></p>
+    </div>
+    <script>
+        // Detect when the user navigates away from the page
+        window.addEventListener('popstate', function(event) {
+            // Check if user is logged in
+            if (isLoggedIn()) {
+                // Redirect to the dashboard
+                window.location.href = '/dashboard';
+            }
+        });
+    </script>    
+</body>
+</html>

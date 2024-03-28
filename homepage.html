@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Automobile Insurance Premium</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .header img {
+            max-width: 100px;
+            margin-right: 10px;
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .navbar {
+            background-color: #f4f4f4;
+            border-bottom: 1px solid #ccc;
+            padding: 10px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .navbar a {
+            text-decoration: none;
+            color: #333;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        .navbar a:hover {
+            color: #666;
+        }
+        .login-link{
+            border: 1px solid #333; /* Border style */
+            padding: 5px 10px; /* Padding around the text */
+            border-radius: 5px; /* Rounded corners */
+        }
+
+        .container {
+            padding: 20px;
+            text-align: center;
+        }
+        .container img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="/static/LOGO_DESIGN.png" alt="Project Logo">
+        <h1>Dynamic Automobile Insurance Premium</h1>
+    </div>
+    <div class="navbar">
+        <a href="{{ url_for('premium') }}" class="premium-link">About</a>
+        <a href="{{ url_for('premium') }}" class="premium-link">Contact Us</a>
+        <a href="{{ url_for('premium') }}" class="premium-link">Premium Calculation</a>
+        <a href="{{ url_for('login') }}" class="login-link">Login</a>
+    </div>
+    <div class="container">
+        <img src="https://via.placeholder.com/800x400" alt="Insurance Premium Image">
+        <h2>Welcome to our project!</h2>
+        <p>This is a project on Dynamic Automobile Insurance Premium using Machine Learning.</p>
+        <p>Explore our website to learn more!</p>
+    </div>
+    <div class="footer">
+        <p>&copy; 2024 Dynamic Automobile Insurance Premium</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insurance Provider Approval</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #00cdd4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+        td:last-child {
+            text-align: center;
+        }
+        .approve-btn, .reject-btn {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .approve-btn {
+            background-color: #28a745;
+            color: #fff;
+        }
+        .reject-btn {
+            background-color: #dc3545;
+            color: #fff;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Insurance Provider Approval</h1>
+    <table id="user-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Phone Number</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Email</th>
+                <th>Licence Number</th>
+                <th>Date Of Birth</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="user-table-body">
+            <!-- User details will be populated here dynamically -->
+        </tbody>
+    </table>
+
+    <script>
+        // Function to handle rejecting a user
+        function rejectUser(button) {
+            // Find the parent row and remove it
+            const row = button.closest('tr');
+            row.remove();
+        }
+    
+        // Fetch user details from Flask backend
+        fetch('/get_insurance_pro')
+            .then(response => response.json())
+            .then(users => {
+                const tableBody = document.getElementById('user-table-body');
+                users.forEach(user => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${user.name}</td>
+                        <td>${user.email}</td>
+                        <td>${user.phn_no}</td>
+                        <td>${user.uname}</td>
+                        <td>${user.password}</td>
+                        <td>${user.email}</td>
+                        <td>${user.lic_no}</td>
+                        <td>${user.dob}</td>
+                        <td>
+                            <button class="approve-btn">Approve</button>
+                            <button class="reject-btn">Reject</button>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+    
+                    // Add event listener to reject button in this row
+                    const rejectButton = row.querySelector('.reject-btn');
+                    rejectButton.addEventListener('click', function() {
+                        rejectUser(this);
+                    });
+                });
+            })
+            .catch(error => console.error('Error fetching user details:', error));
+    </script>
+    
+</body>
+</html>
