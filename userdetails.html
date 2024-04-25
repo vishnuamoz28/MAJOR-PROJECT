@@ -43,6 +43,25 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
+        .buttons-container {
+            text-align: center; /* Align buttons to the center */
+            margin-top: 20px; /* Add margin to separate from user details */
+        }
+        .edit-btn,
+        .submit-btn {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-right: 10px; /* Add margin between buttons */
+        }
+        .edit-btn:hover,
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
@@ -81,26 +100,81 @@
             <input type="text" id="dob" readonly>
         </div>
     </div>
+    </div>
+
+    <div class="buttons-container"> <!-- Container for buttons -->
+        <button class="edit-btn" id="editBtn">Edit</button>
+        <form id="editForm" style="display: none;">
+            <input type="submit" class="submit-btn" value="Submit">
+        </form>
+    </div>
 
     <script>
-        // Fetch user details for the logged-in user from Flask backend
-        fetch('/get_logged_in_user')
-            .then(response => response.json())
-            .then(user => {
-                if (user) { // Check if user details are available
-                    document.getElementById('name').value = user.name;
-                    document.getElementById('age').value = user.age;
-                    document.getElementById('phn_no').value = user.phn_no;
-                    document.getElementById('uname').value = user.uname;
-                    document.getElementById('password').value = user.password;
-                    document.getElementById('email').value = user.email;
-                    document.getElementById('lic_no').value = user.lic_no;
-                    document.getElementById('dob').value = user.dob;
-                } else {
-                    console.error('No user details found.');
-                }
-            })
-            .catch(error => console.error('Error fetching user details:', error));
+        const editBtn = document.getElementById('editBtn');
+        const editForm = document.getElementById('editForm');
+        const userDetails = document.querySelectorAll('.user-details input');
+
+        // Function to fetch user details and populate the form fields
+        const populateUserDetails = () => {
+            fetch('/get_logged_in_user')
+                .then(response => response.json())
+                .then(user => {
+                    if (user) {
+                        userDetails.forEach(input => {
+                            const fieldName = input.getAttribute('id');
+                            input.value = user[fieldName];
+                        });
+                    } else {
+                        console.error('No user details found.');
+                    }
+                })
+                .catch(error => console.error('Error fetching user details:', error));
+        };
+
+        // Call the function to populate user details when the page loads
+        populateUserDetails();
+
+        editBtn.addEventListener('click', () => {
+            editForm.style.display = 'block';
+            userDetails.forEach(input => {
+                input.removeAttribute('readonly');
+            });
+            editBtn.style.display = 'none';
+        });
+
+             // Add event listener for form submission to handle editing and updating user details
+             editForm.addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent default form submission behavior
+            const userData = {
+                 name: document.getElementById('name').value,
+                age: document.getElementById('age').value,
+                phn_no: document.getElementById('phn_no').value,
+                uname: document.getElementById('uname').value,
+                password: document.getElementById('password').value,
+                email: document.getElementById('email').value,
+                lic_no: document.getElementById('lic_no').value,
+                dob: document.getElementById('dob').value
+    };
+
+    // Send a request to the Flask backend to update the database with the edited details
+    fetch('/update_user_details', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('User details updated successfully:', data);
+        alert('User details updated successfully!');
+    })
+    .catch(error => {
+        console.error('Error updating user details:', error);
+        // Optionally, you can display an error message to the user
+    });
+});
+
     </script>
 </body>
 </html>

@@ -10,6 +10,15 @@
             margin: 0;
             padding: 0;
             background-color: #f0f0f0;
+            animation: fadeInAnimation 2s ease-in-out; /* Fade-in animation for the body */
+        }
+        @keyframes fadeInAnimation {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
         .header {
             background-color: #333;
@@ -19,6 +28,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            animation: slideInDownAnimation 1s ease-out; /* Slide-in animation for the header */
         }
         .header img {
             max-width: 100px;
@@ -34,6 +44,7 @@
             display: flex;
             justify-content: flex-end;
             align-items: center;
+            animation: slideInUpAnimation 1s ease-out; /* Slide-in animation for the navbar */
         }
         .navbar a {
             text-decoration: none;
@@ -44,6 +55,10 @@
         .navbar a:hover {
             color: #666;
         }
+        .navbar a:hover,
+        .navbar a:focus {
+            color: #f00; /* Change the color on hover */
+        }
         .login-link{
             border: 1px solid #333; /* Border style */
             padding: 5px 10px; /* Padding around the text */
@@ -53,18 +68,71 @@
         .container {
             padding: 20px;
             text-align: center;
+            position: relative; /* Position relative to contain absolutely positioned children */
+            min-height: calc(100vh - 180px); /* Adjust according to header and footer height */
+            animation: fadeInUpAnimation 1s ease-out; /* Fade-in animation for the container */
         }
         .container img {
             max-width: 100%;
             height: auto;
             margin-bottom: 20px;
             border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .container img:hover {
+            transform: scale(1.1); /* Scale up the image on hover */
+        }
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.5; /* Adjust opacity as needed */
+        }
+        .content {
+            max-width: 800px;
+            margin: 0 auto; /* Center the content */
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         .footer {
             background-color: #333;
             color: #fff;
             padding: 10px;
             text-align: center;
+            animation: slideInUpAnimation 1s ease-out; /* Slide-in animation for the footer */
+        }
+        .container ul {
+            text-align: left; /* Align bullet points to the left */
+            padding-left: 20px; /* Add some padding for better readability */
+        }
+        @keyframes slideInDownAnimation {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+        @keyframes slideInUpAnimation {
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeInUpAnimation {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
@@ -74,16 +142,31 @@
         <h1>Dynamic Automobile Insurance Premium</h1>
     </div>
     <div class="navbar">
-        <a href="{{ url_for('premium') }}" class="premium-link">About</a>
-        <a href="{{ url_for('premium') }}" class="premium-link">Contact Us</a>
+        <a href="#about" class="premium-link">About</a>
+        <a href="#contact" class="premium-link">Contact Us</a>
         <a href="{{ url_for('premium') }}" class="premium-link">Premium Calculation</a>
         <a href="{{ url_for('login') }}" class="login-link">Login</a>
     </div>
     <div class="container">
-        <img src="https://via.placeholder.com/800x400" alt="Insurance Premium Image">
-        <h2>Welcome to our project!</h2>
-        <p>This is a project on Dynamic Automobile Insurance Premium using Machine Learning.</p>
-        <p>Explore our website to learn more!</p>
+        <h3><b><u>WHAT IS INSURANCE PREMIUM?</u></b></h3>
+        <p>Your car insurance premium is the amount you pay your insurance company on a regular basis, often every month or every six months, in exchange for insurance coverage. Once you've paid your premium, your insurer will pay for the coverages detailed in the insurance policy, such as liability and collision coverages. Every insurance company determines its rates differently, but your premium is usually based on details about you, the type of car you own and the coverages you select.</p>
+        <a href="#about"><img src="/static/premiumimg.jpg" width="320px" height="120px"></a>
+        <h3>HOW ARE CAR INSURANCE PREMIUMS CALCULATED?</h3>
+        <ul>
+            <li>Personal information: Your age, gender, and where you live.</li>
+            <li>Credit and driving history: The more responsible you have been in the past with your money and behind the wheel, the lower your premium.</li>
+            <li>Car type: Newer, faster, and more expensive cars have higher premiums across the board.</li>
+            <li>What coverages you select: Adding optional coverages like roadside assistance to your insurance policy will increase your premium, while cutting coverage, like selecting lower limits for your liability portion, will lower it.</li>
+            <li>Discounts: Most insurance companies offer additional discounts for performing certain actions, such as taking a defensive driving course or paying for a year of coverage up front.</li>
+            <li>Deductible amount: The higher your deductible, the lower your insurance premium will be, and vice versa.</li>
+            <li>People on the policy: The more drivers you have on your policy, the more you'll pay each month.</li>
+        </ul>
+    </div>
+    <div id="about" class="container">
+        <h3><u>ABOUT</u></h3>
+        <p>The project “Dynamic automobile insurance premium -pattern and usage analysis using ML and AI” aims to revolutionize the traditional    automobile insurance model by incorporating machine learning (ML) and artificial intelligence (AI) to dynamically analyse patterns and usage data, influencing the determination of insurance premiums. The core objectives involve developing algorithms for dynamic premium determination based on continuously learning and adapting to changing factors such as driver behaviour, accident statistics, and other relevant parameters. 
+            The project also emphasizes pattern analysis of historical data related to accidents, claims, and driving habits, as well as usage analysis, examining factors like distance travelled and driving times. By integrating data from various sources, such as telematics devices and GPS data, the project seeks to identify features contributing to a comprehensive understanding of risk. The expected outcomes include improved risk assessment, fair and personalized premiums, enhanced user experience, and efficiency gains for insurance companies. The goal of the dynamic automobile insurance premium and usage analysis project is to revolutionize the insurance industry by leveraging machine learning and artificial intelligence (AI) techniques to provide personalized insurance schemes and optimize premium pricing based on individual driving behaviors and risk profiles. By collecting and analyzing data from various sources, including telematics devices, mobile applications, and insurance claims histories, the project aims to offer tailored insurance solutions that accurately reflect users' driving habits, vehicle characteristics, and insurance needs. Additionally, the project seeks to enhance user engagement and satisfaction by providing valuable insights into driving behavior, promoting safer driving practices, and offering incentives for responsible behavior. Through the integration of advanced analytics and predictive modeling, the project aims to improve risk assessment, mitigate losses, and optimize underwriting processes, ultimately leading to more efficient and cost-effective insurance offerings for both users and insurance providers.
+        </p>
     </div>
     <div class="footer">
         <p>&copy; 2024 Dynamic Automobile Insurance Premium</p>

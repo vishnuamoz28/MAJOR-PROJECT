@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automobile Insurance Premium Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #0dd7da;
+            background-image: url('/static/images23.jpeg');
+            background-size: cover;
+            border-radius: 20px;
+            box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 600px; /* Increased width */
+            text-align: center;
+        }
+        h1 {
+            color: #0a399e;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        select,
+        input[type="text"],
+        input[type="submit"] {
+            width: calc(100% - 12px);
+            padding: 12px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+            transition: border-color 0.3s;
+            display: inline-block;
+        }
+        input[type="text"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .input-group {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        .input-group input[type="text"],
+        .input-group select {
+            width: calc(30% - 5px); /* Adjusted width for input fields and select */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Automobile Insurance Premium Calculator</h1>
+        <form action="/predict" method="post"> <!-- Modified form action -->
+            <!-- Input fields for user input -->
+            <div class="input-group">
+                <select id="make" name="make" required>
+                    <option value="" disabled selected>Select Make</option>
+                    <option value="Make1">alfa-romero</option>
+                    <option value="Make2">audi</option>
+                    <option value="Make3">bmw</option>
+                    <option value="Make4">chevrolet</option>
+                    <option value="Make5">dodge </option>
+                    <option value="Make6">honda</option>
+                    <option value="Make7">isuzu</option>
+                    <option value="Make8">jaguar</option>
+                    <option value="Make9">mazda</option>
+                    <option value="Make10">mercedes-benz</option>
+                    <option value="Make11">mercury</option>
+                    <option value="Make12">mitsubishi</option>
+                    <option value="Make13">nissan</option>
+                    <option value="Make14">peugot</option>
+                    <option value="Make15">plymouth</option>
+                    <option value="Make16">porsche</option>
+                    <option value="Make17">renault</option>
+                    <option value="Make18">saab</option>
+                    <option value="Make19">subaru</option>
+                    <option value="Make20">toyota</option>
+                    <option value="Make21">volkswagen</option>
+                    <option value="Make22">volvo</option>
+                    <!-- Add more options as needed -->
+                </select>
+                <input type="text" id="model" name="model" placeholder="Model" required> <!-- Modified input field -->
+                <input type="text" id="engine_size" name="engine_size" placeholder="Engine Size" required>
+            </div>
+            <div class="input-group">
+                <!-- Add other input fields for user input -->
+                <input type="text" id="horsepower" name="horsepower" placeholder="Horsepower" required>
+                <input type="text" id="curb_weight" name="curb_weight" placeholder="Curb Weight" required>
+                <select id="fuel_type" name="fuel_type" required>
+                    <option value="" disabled selected>Select Fuel type</option>
+                    <option value="fuel_type1">gas</option>
+                    <option value="fule_type2">diesel</option>
+
+                    <!-- Add more options as needed -->
+                </select>
+            </div>
+            <!-- Add more input groups for other attributes -->
+            <div class="input-group">
+                <input type="text" id="bore" name="bore" placeholder="Bore" required>
+                <input type="text" id="highway_mpg" name="highway_mpg" placeholder="Highway MPG" required>
+                <input type="text" id="city_mpg" name="city_mpg" placeholder="City MPG" required>
+            </div>
+            <div class="input-group">
+                <input type="text" id="peak_rpm" name="peak_rpm" placeholder="Peak RPM" required>
+                <select id="engine_type" name="engine_type" required>
+                    <option value="" disabled selected>Select Fuel System </option>
+                    <option value="engine_type1">dohc</option>
+                    <option value="engine_type2">ohcv</option>
+                    <option value="engine_type3">ohc</option>
+                    <option value="engine_type4">l</option>
+                    <option value="engine_type5">ohcf</option>
+                    <!-- Add more options as needed -->
+                </select>
+                <input type="text" id="fuel_system" name="fuel_system" placeholder="Fuel System" required>
+            </div>
+            <div class="input-group">
+                <input type="text" id="no_of_claims" name="no_of_claims" placeholder="No of claims" required>
+            </div>
+            <!-- Submit button -->
+            <input type="submit" value="Calculate the Premium">
+            <!-- <div>
+                <h2>Predicted Price:</h2>
+                <p>{{ prediction }}</p>
+            </div> -->
+        </form>
+    <!-- Conditionally render the "View Claims" link -->
+            {% if prediction %}
+            <div>
+                <h2>Predicted Price:</h2>
+                <p>{{ prediction }}</p>
+            </div>
+            <a href="{{ url_for('view_claims', predicted_val=prediction) }}">View Premiums</a>
+            {% endif %}
+  
+</body>
+</html>
+</html>
